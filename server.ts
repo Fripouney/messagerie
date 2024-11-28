@@ -1,9 +1,5 @@
 import express from 'express';
-import * as bodyParser from 'body-parser';
 import { createPool } from 'mysql2';
-//const express = require('express');
-//const cors = require('cors');
-//const mysql = require('mysql2');
 
 export function connect() {
   const connection = createPool({

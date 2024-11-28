@@ -6,7 +6,7 @@ import userRoutes from "./user.routes";
 export default class Routes {
     constructor(app: Application) {
         app.use("/", channelRoutes);
-        app.use("/channel", messageRoutes);
-        app.use("/user", userRoutes);
+        app.use("/channels", messageRoutes);
+        app.use("/users", userRoutes);
     }
 }

@@ -1,1 +1,12 @@
-<p>auth works!</p>
+<h1>Connectez vous</h1>
+
+<p>
+    <label for="username">Nom d'utilisateur : </label>
+    <input type="text" id="username" [(ngModel)]="username">
+</p>
+<p>
+    <label for="password">Mot de passe : </label>
+    <input type="password" id="password" [(ngModel)]="password">
+</p>
+<button type="button" (click)="connect()">Se connecter</button>
+<p>Vous n'avez pas de compte ?? <a>Inscrivez-vous</a></p>

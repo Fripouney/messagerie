@@ -1,3 +1,3 @@
 # Messagerie
 
-Je n'ai pas réussi à faire plus qu'un back
+Je n'ai pas pu avancer suite à un problème avec MySQL

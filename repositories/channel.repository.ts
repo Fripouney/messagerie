@@ -4,7 +4,7 @@ import { connect } from "../server";
 
 interface IChannelRepository {
     getById(channelId: number): Promise<Channel>;
-    create(name: String): Promise<Channel>;
+    create(channel: Channel): Promise<Channel>;
     delete(channelId: number): Promise<number>;
     addUserToChannel(userId: number, channelId: number): Promise<number>;
     getAll(userId: number): Promise<Channel[]>
@@ -34,10 +34,10 @@ class ChannelRepository implements IChannelRepository {
         })
     }
 
-    create(name: String): Promise<Channel> {
+    create(channel: Channel): Promise<Channel> {
         return new Promise((resolve, reject) => {
             const conn = connect();
-            conn.query<ResultSetHeader>(`INSERT INTO channels (name, created_at) VALUES (${name})`, (err, res) => {
+            conn.query<ResultSetHeader>(`INSERT INTO channels (name, created_at) VALUES (${channel.name})`, (err, res) => {
                 if(err)
                     reject(err);
                 else

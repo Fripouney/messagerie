@@ -3,7 +3,7 @@ import User from "../models/user";
 import { connect } from "../server";
 
 interface IUserRepository {
-    add(username: String, password: String): Promise<User>;
+    add(user: User): Promise<User>;
     getByUsername(username: String): Promise<User>;
     delete(userId: number): Promise<number>;
 }
@@ -20,15 +20,15 @@ class UserRepository implements IUserRepository {
             })
         })
     }
-    add(username: String, password: String): Promise<User> {
+    add(user: User): Promise<User> {
         return new Promise((resolve, reject) => {
             const conn = connect();
-            conn.query<ResultSetHeader>(`INSERT INTO users (username, password) VALUES (${username}, ${password})`, (err, res) => {
+            conn.query<ResultSetHeader>(`INSERT INTO users (username, password) VALUES (${user.username}, ${user.password})`, (err, res) => {
                 if(err) {
                     reject(err);
                 } else {
-                    this.getByUsername(username).then(user => {
-                        resolve(user);
+                    this.getByUsername(user.username).then(fetchedUser => {
+                        resolve(fetchedUser);
                     }).catch(error => {
                         reject(error);
                     })

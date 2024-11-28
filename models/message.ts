@@ -4,8 +4,8 @@ import User from "./user";
 
 export interface Message extends RowDataPacket {
     id: number;
-    author: User;
+    authorId: number;
     content: String;
     created_at: Date;
-    channel: Channel;
+    channelId: number;
 }

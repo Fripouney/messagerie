@@ -5,7 +5,7 @@ import { connect } from "../server";
 import { ResultSetHeader } from "mysql2";
 
 interface IMessageRepository {
-    create(author: User, content: String, channelId: number): Promise<Message>;
+    create(message: Message): Promise<Message>;
     getById(messageId: number): Promise<Message>;
     getAllInChannel(channelId: number): Promise<Message[]>
 
@@ -23,10 +23,10 @@ class MessageRepository implements IMessageRepository {
             })
         })
     }
-    create(author: User, content: String, channelId: number): Promise<Message> {
+    create(message: Message): Promise<Message> {
         return new Promise((resolve, reject) => {
             const conn = connect();
-            conn.query<ResultSetHeader>(`INSERT INTO messages (content, author_id, channel_id) VALUES (${content}, ${author.id}, ${channelId}`, (err, res) => {
+            conn.query<ResultSetHeader>(`INSERT INTO messages (content, author_id, channel_id) VALUES (${message.content}, ${message.authorId}, ${message.channelId}`, (err, res) => {
                 if(err)
                     reject(err);
                 else {
